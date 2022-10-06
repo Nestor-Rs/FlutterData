@@ -18,6 +18,20 @@ class _HomePageState extends State<HomePage> {
     print("Initia State");
   }
 
+  void increment() {
+    _counter++;
+    setState(() {
+          
+    });
+  }
+
+  void decrement(){
+    _counter--;
+    setState(() {
+          
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,7 +39,30 @@ class _HomePageState extends State<HomePage> {
         title: Text("Mi primera app"),
       ),
       body: Center(
-        child: Column(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(onPressed: decrement, child:const Icon(Icons.remove),),
+            Text(
+              _counter.toString(),
+              style: Theme.of(context).textTheme.headline4,
+            ),
+            ElevatedButton(onPressed: increment, child:const Icon(Icons.add),),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(onPressed: (){
+        _counter++;
+        
+      },
+      //Icon(Icons.remove)
+      child: const Icon(Icons.add),
+      ),
+    );
+  }
+}
+
+/*child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text("Hola mundito"),
@@ -35,15 +72,4 @@ class _HomePageState extends State<HomePage> {
             )
           ],
         ),
-      ),
-      floatingActionButton: FloatingActionButton(onPressed: (){
-        _counter++;
-        setState(() {
-          
-        });
-      },
-      child: const Icon(Icons.add),
-      ),
-    );
-  }
-}
+        */
