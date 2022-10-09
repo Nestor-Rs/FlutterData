@@ -1,7 +1,5 @@
+import 'package:aplicationdata/examples/to_do/my_app_to_doo.dart';
 import 'package:flutter/material.dart';
-import 'package:aplicationdata/examples/counter/my_app_counter.dart';
 
-void main() {
-  runApp(MyAppCounter());
-}
+void main() => runApp(new MyApp());
 
