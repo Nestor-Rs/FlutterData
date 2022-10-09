@@ -12,11 +12,6 @@ final task = [
   //new Text("HolaMundito"),
   new ToDo(task:'IA'),
   new ToDo(task:'Movil'),
-  new ToDo(task:'Big Data'),
-  new ToDo(task:'Sis Integrados'),
-  new ToDo(task:'Humanismo Clasico'),
-  new ToDo(task:'Practicum'),
-  new ToDo(task:'Adm Proyectos'),
 ];
 
 /*
