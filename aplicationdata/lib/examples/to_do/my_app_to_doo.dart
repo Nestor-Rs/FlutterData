@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:aplicationdata/examples/to_do/to_do.dart';
 
@@ -71,15 +73,17 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
       ),
     );
   }
-}
 
-Widget _buildItem(ToDo toDo) {
-  return new ListTile(
-    title: new Text(toDo.task),
-    //subtitle: new Text('Capital: ${toDo.date}'),
-    leading: new Icon(Icons.assignment_turned_in_outlined),
-    onTap: () {
-      print(toDo.task);
-    },
-  );
+  Widget _buildItem(ToDo toDo) {
+    return new ListTile(
+      title: new Text(toDo.task),
+      leading: new Icon(Icons.assignment_turned_in_outlined),
+      onTap: () {
+        print(toDo.task);
+        task.remove(toDo);
+        setState(() {});
+      },
+    );
+  }
+
 }
