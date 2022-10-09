@@ -1,5 +1,3 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
 import 'package:aplicationdata/examples/to_do/to_do.dart';
 
@@ -38,7 +36,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return Form(
       key: _formKey,
       child: ListView(
-        //crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           TextFormField(
             decoration: const InputDecoration(
@@ -56,8 +53,6 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             padding: const EdgeInsets.symmetric(vertical: 16.0),
             child: ElevatedButton(
               onPressed: () {
-                // Validate will return true if the form is valid, or false if
-                // the form is invalid.
                 if (_formKey.currentState!.validate()) {
                   task.add(new ToDo(task: actualTask));
                   setState(() {});
@@ -77,11 +72,16 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   Widget _buildItem(ToDo toDo) {
     return new ListTile(
       title: new Text(toDo.task),
-      leading: new Icon(Icons.assignment_turned_in_outlined),
-      onTap: () {
-        print(toDo.task);
+      //leading: new Icon(Icons.assignment_turned_in_outlined),
+      trailing: new IconButton(onPressed: (){
         task.remove(toDo);
         setState(() {});
+      }, 
+      icon: Icon(Icons.delete),
+      color: Colors.amber,
+      ),
+      onTap: () {
+        print(toDo.task);
       },
     );
   }
