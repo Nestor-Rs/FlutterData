@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:aplicationdata/examples/to_do/to_do.dart';
+import 'package:aplicationdata/examples/to_do_firebase/to_do.dart';
+import 'package:firebase_database/firebase_database.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -30,9 +31,15 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   String actualTask = "";
+  List<ToDo> lista = task.toList();
+
+  FirebaseDatabase database = FirebaseDatabase.instance;
+  DatabaseReference ref = FirebaseDatabase.instance.ref();
 
   @override
   Widget build(BuildContext context) {
+    getData();
+    final listaData = lista;
     return Form(
       key: _formKey,
       child: ListView(
@@ -62,7 +69,7 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
             ),
           ),
           ListBody(
-            children: task.map(_buildItem).toList(),
+            children: listaData.map(_buildItem).toList(),
           ),
         ],
       ),
@@ -73,12 +80,13 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     return new ListTile(
       title: new Text(toDo.task),
       //leading: new Icon(Icons.assignment_turned_in_outlined),
-      trailing: new IconButton(onPressed: (){
-        task.remove(toDo);
-        setState(() {});
-      }, 
-      icon: Icon(Icons.delete),
-      color: Colors.amber,
+      trailing: new IconButton(
+        onPressed: () {
+          task.remove(toDo);
+          setState(() {});
+        },
+        icon: Icon(Icons.delete),
+        color: Colors.amber,
       ),
       onTap: () {
         print(toDo.task);
@@ -86,4 +94,18 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
     );
   }
 
+  void getData() async {
+    final snapshot = await ref.child('').get();
+    final List<ToDo> lis = [];
+    if (snapshot.exists) {
+      lis.add(new ToDo(task: snapshot.value.toString()));
+    } else {
+      print('No data available.');
+    }
+    lista = lis;
+    setState(() {});
+    //final lista = task;
+  }
+
+  void setData() async {}
 }

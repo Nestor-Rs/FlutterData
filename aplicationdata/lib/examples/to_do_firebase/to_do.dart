@@ -10,6 +10,5 @@ class ToDo {
 
 final task = [
   //new Text("HolaMundito"),
-  new ToDo(task:'IA'),
-  new ToDo(task:'Movil'),
+  new ToDo(task:'Si ves esto es que no ha cargado'),
 ];
