@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:aplicationdata/examples/to_do_firebase/to_do.dart';
 import 'package:firebase_database/firebase_database.dart';
@@ -96,9 +99,12 @@ class _MyStatefulWidgetState extends State<MyStatefulWidget> {
 
   void getData() async {
     final snapshot = await ref.child('').get();
-    final List<ToDo> lis = [];
+    List<ToDo> lis = [];
     if (snapshot.exists) {
-      lis.add(new ToDo(task: snapshot.value.toString()));
+      for (var value in snapshot.children) {
+        lis.add(new ToDo(task: value.value.toString()));
+      }
+      //lis.add(new ToDo(task: snapshot.value.toString()));
     } else {
       print('No data available.');
     }
